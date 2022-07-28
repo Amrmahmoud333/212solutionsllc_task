@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_212solutionsllc/data/firebase/authentication.dart';
+import 'package:task_212solutionsllc/logic/cubit/authentication_cubit/authentication_cubit.dart';
+import 'package:task_212solutionsllc/views/home_page/home_page.dart';
 import 'package:task_212solutionsllc/views/sign_in/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -19,7 +24,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignInScreen(),
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromARGB(255, 221, 59, 116),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return const Center(child: Text('Something wrong!!'));
+            }
+            if (snapshot.hasData) {
+              // if the user is login
+              return const HomePage();
+            } else {
+              return BlocProvider(
+                create: (context) =>
+                    AuthenticationCubit(authentication: Authentication()),
+                child: SignInScreen(),
+              );
+            }
+          }),
     );
   }
 }

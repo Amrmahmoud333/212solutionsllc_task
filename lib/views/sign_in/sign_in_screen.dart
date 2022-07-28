@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_212solutionsllc/logic/cubit/authentication_cubit/authentication_cubit.dart';
 import 'package:task_212solutionsllc/views/shared/custom_button.dart';
 import 'package:task_212solutionsllc/views/sign_in/widgets/input_field.dart';
 
@@ -18,6 +20,7 @@ class SignInScreen extends StatelessWidget {
       return MediaQuery.of(context).size.width * (n / 393);
     }
 
+    AuthenticationCubit cubit = context.read<AuthenticationCubit>();
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -116,7 +119,11 @@ class SignInScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: w(53)),
                             child: CustomButton(
                               label: 'Log in',
-                              ontap: () {},
+                              ontap: () {
+                                cubit.signIn(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                              },
                             ),
                           ),
                         ],
