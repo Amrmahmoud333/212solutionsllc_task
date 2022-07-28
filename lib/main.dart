@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
               );
             } else if (snapshot.hasError) {
               return const Center(child: Text('Something wrong!!'));
-            }
-            if (snapshot.hasData) {
+            } else if (snapshot.hasData) {
               // if the user is login
               return const HomePage();
             } else {
