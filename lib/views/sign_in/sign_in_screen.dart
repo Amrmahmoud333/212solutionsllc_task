@@ -3,13 +3,12 @@ import 'package:task_212solutionsllc/views/shared/custom_button.dart';
 import 'package:task_212solutionsllc/views/sign_in/widgets/input_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
-
+  SignInScreen({Key? key}) : super(key: key);
+  final fromKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final fromKey = GlobalKey<FormState>();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
     // this two function to make responsice degsin
     double h(double n) {
       return MediaQuery.of(context).size.height * (n / 851);
