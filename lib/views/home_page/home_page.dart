@@ -42,8 +42,8 @@ class HomePage extends StatelessWidget {
                       document.data()! as Map<String, dynamic>;
                   String date = data['date'].toString();
                   return ListTile(
-                    title: Text(date.substring(0, 10)),
-                    subtitle: Text(data['weight'].toString()),
+                    title: Text('date: ${date.substring(0, 10)}'),
+                    subtitle: Text('weight : ${data['weight'].toString()}'),
                   );
                 }).toList(),
               );
