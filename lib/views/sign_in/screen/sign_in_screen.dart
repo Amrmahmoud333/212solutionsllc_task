@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_212solutionsllc/logic/cubit/authentication_cubit/authentication_cubit.dart';
+import 'package:task_212solutionsllc/views/home_page/home_page.dart';
 import 'package:task_212solutionsllc/views/shared/custom_button.dart';
 import 'package:task_212solutionsllc/views/sign_in/widgets/input_field.dart';
 
@@ -96,24 +97,9 @@ class SignInScreen extends StatelessWidget {
                             sizeoflabel: 18,
                             obscureText: false,
                             controller: passwordController,
-                            widget: InkWell(
-                              onTap: () {
-                                // cubit.changeObscureText();
-                              },
-                              child: const Text(
-                                // cubit.obscureText ? 'Show' : 'Hide',
-                                'show',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'DavidLibre',
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 221, 59, 116),
-                                ),
-                              ),
-                            ),
                           ),
                           SizedBox(
-                            height: h(25),
+                            height: h(5),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: w(53)),
@@ -123,6 +109,22 @@ class SignInScreen extends StatelessWidget {
                                 cubit.signIn(
                                     email: emailController.text,
                                     password: passwordController.text);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: h(5),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: w(53)),
+                            child: CustomButton(
+                              label: 'Anonymous',
+                              ontap: () {
+                                cubit.signInAnon();
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            const HomePage())));
                               },
                             ),
                           ),

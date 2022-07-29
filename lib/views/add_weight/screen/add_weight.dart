@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_212solutionsllc/logic/cubit/wieght_cubit/weight_cubit.dart';
 import 'package:task_212solutionsllc/views/shared/custom_button.dart';
 import 'package:task_212solutionsllc/views/sign_in/widgets/input_field.dart';
 
@@ -25,8 +27,10 @@ class AddWeight extends StatelessWidget {
           ),
           CustomButton(
             label: 'submit',
-            ontap: () {
-              
+            ontap: () async {
+              await context.read<WeightCubit>().registerNewWeight(
+                  newWeight: double.parse(weightController.text));
+              Navigator.pop(context);
             },
           ),
         ],
